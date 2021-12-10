@@ -17,7 +17,7 @@
 #define DOCTEST_STL_STRINGIFY_GEN_IMPL(temp, type, func, varName) \
 DOCTEST_NAMESPACE { namespace DOCTEST_STL_DETAIL_NAMESPACE_NAME { \
 template <DOCTEST_STL_DEBRACE temp> \
-String func(const DOCTEST_STL_DEBRACE type&); \
+inline String func(const DOCTEST_STL_DEBRACE type&); \
 } /* deail */ \
 template <DOCTEST_STL_DEBRACE temp> \
 struct StringMaker<DOCTEST_STL_DEBRACE type> { \
@@ -25,7 +25,7 @@ struct StringMaker<DOCTEST_STL_DEBRACE type> { \
 }; \
 } /* doctest */ \
 template <DOCTEST_STL_DEBRACE temp> \
-doctest::String doctest::DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(const DOCTEST_STL_DEBRACE type& varName)
+inline doctest::String doctest::DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(const DOCTEST_STL_DEBRACE type& varName)
 
 #define DOCTEST_STL_STRINGIFY_GEN(temp, type, varName) DOCTEST_STL_STRINGIFY_GEN_IMPL(temp, type, DOCTEST_ANONYMOUS(_), varName)
 
@@ -149,10 +149,10 @@ DOCTEST_STL_UMAP(std::unordered_multimap)
 #include <utility>
 DOCTEST_STL_NAMESPACES_BEGIN
 template <typename T>
-static void _appendInt(String& s) { }
+inline static void _appendInt(String& s) { }
 
 template <typename T, T I, T... INTS>
-static void _appendInt(String& s) {
+inline static void _appendInt(String& s) {
     s += toString(I);
     if (sizeof...(INTS) != 0) {
         s += ", ";
@@ -179,11 +179,11 @@ DOCTEST_STL_STRINGIFY_GEN((typename T, typename S), (std::pair<T, S>), var) {
 DOCTEST_STL_NAMESPACES_BEGIN
 template <size_t I = 0, typename... TYPES>
 static std::enable_if<I == sizeof...(TYPES)>::type
-_appendTupleIndexed(String& s, const std::tuple<TYPES...>& tuple) { }
+inline _appendTupleIndexed(String& s, const std::tuple<TYPES...>& tuple) { }
 
 template <size_t I = 0, typename... TYPES>
 static std::enable_if < I < sizeof...(TYPES)>::type
-_appendTupleIndexed(String& s, const std::tuple<TYPES...>& tuple) {
+inline _appendTupleIndexed(String& s, const std::tuple<TYPES...>& tuple) {
     s += toString(std::get<I>(tuple));
     if (I + 1 < sizeof...(TYPES)) {
         s += ", ";
