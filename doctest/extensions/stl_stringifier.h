@@ -14,20 +14,30 @@
 
 #define DOCTEST_STL_DEBRACE(...) __VA_ARGS__
 
-#define DOCTEST_STL_STRINGIFY_GEN_IMPL(temp, type, func, varName) \
-DOCTEST_NAMESPACE { namespace DOCTEST_STL_DETAIL_NAMESPACE_NAME { \
-template <DOCTEST_STL_DEBRACE temp> \
+#define DOCTEST_STL_STRINGIFY_IMPL_IMPL(funcTemp, specTemp, type, varName, func) \
+DOCTEST_STL_NAMESPACES_BEGIN \
+DOCTEST_STL_DEBRACE funcTemp \
 inline String func(const DOCTEST_STL_DEBRACE type&); \
-} /* deail */ \
-template <DOCTEST_STL_DEBRACE temp> \
-struct StringMaker<DOCTEST_STL_DEBRACE type> { \
-    static String convert(const DOCTEST_STL_DEBRACE type& value) { return DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(value); } \
+DOCTEST_STL_NAMESPACES_END \
+template <DOCTEST_STL_DEBRACE specTemp> \
+struct doctest::StringMaker<DOCTEST_STL_DEBRACE type> { \
+    static String convert(const DOCTEST_STL_DEBRACE type& value) { \
+        return doctest::DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(value); \
+    } \
 }; \
-} /* doctest */ \
-template <DOCTEST_STL_DEBRACE temp> \
+DOCTEST_STL_DEBRACE funcTemp \
 inline doctest::String doctest::DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(const DOCTEST_STL_DEBRACE type& varName)
 
-#define DOCTEST_STL_STRINGIFY_GEN(temp, type, varName) DOCTEST_STL_STRINGIFY_GEN_IMPL(temp, type, DOCTEST_ANONYMOUS(_), varName)
+#define DOCTEST_STL_STRINGIFY_IMPL(funcTemp, specTemp, type, varName) \
+DOCTEST_STL_STRINGIFY_IMPL_IMPL(funcTemp, specTemp, type, varName, DOCTEST_ANONYMOUS(_))
+
+#define DOCTEST_STL_STRINGIFY(type, varName) \
+DOCTEST_STL_STRINGIFY_IMPL((), (), (type), varName)
+
+#define DOCTEST_STL_STRINGIFY_GEN_IMPL(temp, type, varName) \
+DOCTEST_STL_STRINGIFY_IMPL((template <DOCTEST_STL_DEBRACE temp>), temp, type, varName)
+
+#define DOCTEST_STL_STRINGIFY_GEN(temp, type, varName) DOCTEST_STL_STRINGIFY_GEN_IMPL(temp, type, varName)
 
 #define DOCTEST_STL_CONTAINER(temp, type, begin, end) DOCTEST_STL_STRINGIFY_GEN(temp, type, var) { \
     String s = begin; \
@@ -210,41 +220,41 @@ DOCTEST_STL_STRINGIFY_GEN((std::intmax_t NUM, std::intmax_t DEN), (std::ratio<NU
 DOCTEST_STL_STRINGIFY_GEN((typename... T), (std::variant<T...>), value) {
     return "(" + std::visit([](auto&& val) { return toString(val); }, value) + ")";
 }
+DOCTEST_STL_STRINGIFY(std::monostate, ) {
+    return "monostate";
+}
+#endif
+
+#if defined(DOCTEST_STL_STRINGIFY_OPTIONAL) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
+#include <optional>
+DOCTEST_STL_STRINGIFY_GEN((typename T), (std::optional<T>), var) {
+    return var.has_value() ? toString(var.value()) : toString(std::nullopt);
+}
+DOCTEST_STL_STRINGIFY(std::nullopt_t, ) {
+    return "nullopt";
+}
 #endif
 
 #if defined(DOCTEST_STL_STRINGIFY_TYPE_INFO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <typeinfo>
-template <> struct doctest::StringMaker<std::type_info> {
-    static String convert(const std::type_info& value) {
-        return String(value.name());
-    }
-};
+DOCTEST_STL_STRINGIFY(std::type_info, value) {
+    return String(value.name());
+}
 #endif
 
-
-#undef DOCTEST_NAMESPACE
-
-#undef DOCTEST_STL_DETAIL_NAMESPACE_NAME
-#undef DOCTEST_STL_NAMESPACES_BEGIN
-#undef DOCTEST_STL_NAMESPACES_END
-
-#undef DOCTEST_STL_DEBRACE
-
-#undef DOCTEST_STL_STRINGIFY_GEN_IMPL
-#undef DOCTEST_STL_STRINGIFY_GEN
-
-#undef DOCTEST_STL_CONTAINER
-
-#undef DOCTEST_STL_ARRAY
-#undef DOCTEST_STL_SIMPLE_CONTAINER
-
-#undef DOCTEST_STL_ADAPTER
-#undef DOCTEST_STL_SIMPLE_ADAPTER
-
-#undef DOCTEST_STL_SET
-#undef DOCTEST_STL_USET
-
-#undef DOCTEST_STL_MAP
-#undef DOCTEST_STL_UMAP
+#if defined(DOCTEST_STL_STRINGIFY_CHRONO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
+#include <chrono>
+#include <iomanip> // we don't *need* this, but I won't be writing my own time stringifier
+DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_point<CLOCK, DUR>), value) {
+    namespace stc = std::chrono;
+    stc::system_clock::time_point sctp = stc::system_clock::now() + stc::duration_cast<stc::system_clock::duration>(value - CLOCK::now());
+    time_t t = stc::system_clock::to_time_t(sctp);
+    tm* tm = localtime(&t);
+    stc::system_clock::rep millis = stc::duration_cast<stc::milliseconds>(sctp.time_since_epoch()).count();
+    std::stringstream ss;
+    ss << std::put_time(tm, "%F %T") << '.' << std::setfill('0') << std::setw(3) << (millis % 1000) << " (local time)";
+    return ss.str();
+}
+#endif
 
 #endif // DOCTEST_STL_STRINGIFIER_H_INCLUDED
