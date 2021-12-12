@@ -411,6 +411,7 @@ DOCTEST_GCC_SUPPRESS_WARNING_POP
 #include <iosfwd>
 #include <cstddef>
 #include <ostream>
+#include <istream>
 #else // DOCTEST_CONFIG_USE_STD_HEADERS
 
 #if DOCTEST_CLANG
@@ -438,6 +439,9 @@ struct char_traits<char>;
 template <class charT, class traits>
 class basic_ostream;
 typedef basic_ostream<char, char_traits<char>> ostream;
+template <class charT, class traits>
+class basic_istream;
+typedef basic_istream<char, char_traits<char>> istream;
 template <class... Types>
 class tuple;
 #if DOCTEST_MSVC >= DOCTEST_COMPILER(19, 20, 0)
@@ -502,6 +506,8 @@ class DOCTEST_INTERFACE String
         view data;
     };
 
+    char* allocate(unsigned sz);
+
     bool isOnStack() const { return (buf[last] & 128) == 0; }
     void setOnHeap();
     void setLast(unsigned in = last);
@@ -515,6 +521,8 @@ public:
     // cppcheck-suppress noExplicitConstructor
     String(const char* in);
     String(const char* in, unsigned in_size);
+
+    String(std::istream& in, unsigned in_size);
 
     String(const String& other);
     String& operator=(const String& other);
@@ -862,10 +870,8 @@ namespace detail {
     template<class T>
     using has_insertion_operator = has_insertion_operator_impl::check<const T>;
 
-    DOCTEST_INTERFACE void my_memcpy(void* dest, const void* src, unsigned num);
-
-    DOCTEST_INTERFACE std::ostream* getTlsOss(bool reset=true); // returns a thread-local ostringstream
-    DOCTEST_INTERFACE String getTlsOssResult();
+    DOCTEST_INTERFACE std::ostream& tlssPush();
+    DOCTEST_INTERFACE String tlssPop();
 
 
     template <bool C>
@@ -881,38 +887,40 @@ namespace detail {
     template<typename T>
     struct filldata
     {
-        static void fill(const  T &in) {
-          *getTlsOss() << in;
+        static void fill(std::ostream& stream, const  T &in) {
+          stream << in;
         }
     };
-
-    /* This method can be chained */
-    template<typename T,unsigned long N>
-    void fillstream(const T (&in)[N] ) {
-        for(unsigned long i = 0; i < N; i++) {
-            *getTlsOss(false) << in[i];
-        }
-    }
 
     template<typename T,unsigned long N>
     struct filldata<T[N]>
     {
-        static void fill(const T (&in)[N]) {
-                    fillstream(in);
-                    *getTlsOss(false)<<"";
+        static void fill(std::ostream& stream, const T (&in)[N]) {
+            for (unsigned long i = 0; i < N; i++) {
+                stream << in[i];
+            }
+        }
+    };
+
+    // Specialized since we don't want the terminating null byte!
+    template<unsigned long N>
+    struct filldata<const char[N]>
+    {
+        static void fill(std::ostream& stream, const char(&in)[N]) {
+            stream << in;
         }
     };
 
     template<typename T>
-    void filloss(const T& in){
-	filldata<T>::fill(in);
+    void filloss(std::ostream& stream, const T& in){
+	    filldata<T>::fill(stream, in);
     }
 
     template<typename T,unsigned long N>
-    void filloss(const T (&in)[N]) {
-	// T[N], T(&)[N], T(&&)[N] have same behaviour.
+    void filloss(std::ostream& stream, const T (&in)[N]) {
+        // T[N], T(&)[N], T(&&)[N] have same behaviour.
         // Hence remove reference.
-	filldata<typename remove_reference <decltype(in)>::type >::fill(in);
+        filldata<typename remove_reference<decltype(in)>::type>::fill(stream, in);
     }
 
     template <>
@@ -921,14 +929,15 @@ namespace detail {
         template <typename T>
         static String convert(const DOCTEST_REF_WRAP(T) in) {
             /* When parameter "in" is a null terminated const char* it works.
-	     * When parameter "in" is a T arr[N] without '\0' we can fill the
+	         * When parameter "in" is a T arr[N] without '\0' we can fill the
              * stringstream with N objects (T=char).If in is char pointer *
              * without '\0' , it would cause segfault
-	     * stepping over unaccessible memory.
+	         * stepping over unaccessible memory.
              */
 
-            filloss(in);
-            return getTlsOssResult();
+            std::ostream& stream = tlssPush();
+            filloss(stream, in);
+            return tlssPop();
         }
     };
 
@@ -1604,21 +1613,21 @@ DOCTEST_CLANG_SUPPRESS_WARNING_POP
     struct StringStreamBase
     {
         template <typename T>
-        static void convert(std::ostream* s, const T& in) {
-            *s << toString(in);
+        static void convert(std::ostream& s, const T& in) {
+            s << toString(in);
         }
 
         // always treat char* as a string in this context - no matter
         // if DOCTEST_CONFIG_TREAT_CHAR_STAR_AS_STRING is defined
-        static void convert(std::ostream* s, const char* in) { *s << String(in); }
+        static void convert(std::ostream& s, const char* in) { s << String(in); }
     };
 
     template <>
     struct StringStreamBase<true>
     {
         template <typename T>
-        static void convert(std::ostream* s, const T& in) {
-            *s << in;
+        static void convert(std::ostream& s, const T& in) {
+            s << in;
         }
     };
 
@@ -1627,7 +1636,7 @@ DOCTEST_CLANG_SUPPRESS_WARNING_POP
     {};
 
     template <typename T>
-    void toStream(std::ostream* s, const T& value) {
+    void toStream(std::ostream& s, const T& value) {
         StringStream<T>::convert(s, value);
     }
 
@@ -1684,6 +1693,7 @@ DOCTEST_CLANG_SUPPRESS_WARNING_POP
     struct DOCTEST_INTERFACE MessageBuilder : public MessageData
     {
         std::ostream* m_stream;
+        bool          logged = false;
 
         MessageBuilder(const char* file, int line, assertType::Enum severity);
         MessageBuilder() = delete;
@@ -1692,7 +1702,7 @@ DOCTEST_CLANG_SUPPRESS_WARNING_POP
         // the preferred way of chaining parameters for stringification
         template <typename T>
         MessageBuilder& operator,(const T& in) {
-            toStream(m_stream, in);
+            toStream(*m_stream, in);
             return *this;
         }
 
