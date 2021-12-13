@@ -5,10 +5,8 @@
 #include "../doctest.h"
 #endif
 
-#define DOCTEST_NAMESPACE namespace doctest
-
 #define DOCTEST_STL_DETAIL_NAMESPACE_NAME detail
-#define DOCTEST_STL_NAMESPACES_BEGIN DOCTEST_NAMESPACE { namespace DOCTEST_STL_DETAIL_NAMESPACE_NAME {
+#define DOCTEST_STL_NAMESPACES_BEGIN namespace doctest { namespace DOCTEST_STL_DETAIL_NAMESPACE_NAME {
 #define DOCTEST_STL_NAMESPACES_END } }
 
 
@@ -249,11 +247,10 @@ DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_poi
     namespace stc = std::chrono;
     stc::system_clock::time_point sctp = stc::system_clock::now() + stc::duration_cast<stc::system_clock::duration>(value - CLOCK::now());
     time_t t = stc::system_clock::to_time_t(sctp);
-    tm* tm = localtime(&t);
     stc::system_clock::rep millis = stc::duration_cast<stc::milliseconds>(sctp.time_since_epoch()).count();
-    std::stringstream ss;
-    ss << std::put_time(tm, "%F %T") << '.' << std::setfill('0') << std::setw(3) << (millis % 1000) << " (local time)";
-    return ss.str();
+    std::ostream& ss = detail::tlssPush();
+    ss << std::put_time(localtime(&t), "%F %T") << '.' << std::setfill('0') << std::setw(3) << (millis % 1000) << " (local time)";
+    return detail::tlssPop();
 }
 #endif
 
