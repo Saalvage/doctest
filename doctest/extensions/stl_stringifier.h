@@ -165,6 +165,7 @@ DOCTEST_STL_UMAP(std::unordered_multimap)
 
 #if defined(DOCTEST_STL_STRINGIFY_UTILITY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <utility>
+#if DOCTEST_CPP >= 14
 DOCTEST_STL_NAMESPACES_BEGIN
 template <typename T>
 inline static void _appendInt(String& s) { }
@@ -179,7 +180,6 @@ inline static void _appendInt(String& s) {
 }
 DOCTEST_STL_NAMESPACES_END
 
-#if DOCTEST_CPP >= 14
 DOCTEST_STL_STRINGIFY_GEN((typename T, T... INTS), (std::integer_sequence<T, INTS...>), var) {
     String nums;
     if (sizeof...(INTS) != 0) {
@@ -218,9 +218,7 @@ DOCTEST_STL_STRINGIFY_GEN((typename... TYPES), (std::tuple<TYPES...>), var) {
     return "(" + data + ")";
 }
 #endif
-#endif
 
-#if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_RATIO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <ratio>
 DOCTEST_STL_STRINGIFY_GEN((std::intmax_t NUM, std::intmax_t DEN), (std::ratio<NUM, DEN>), var) {
