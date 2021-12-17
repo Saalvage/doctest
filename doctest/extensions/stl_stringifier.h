@@ -258,6 +258,7 @@ DOCTEST_STL_STRINGIFY(std::type_info, value) {
 }
 #endif
 
+#if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_CHRONO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <chrono>
 #include <iomanip> // we don't *need* this, but I won't be writing my own time stringifier
@@ -270,6 +271,7 @@ DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_poi
     ss << std::put_time(localtime(&t), "%F %T") << '.' << std::setfill('0') << std::setw(3) << (millis % 1000) << " (local time)";
     return detail::tlssPop();
 }
+#endif
 #endif
 
 #endif // DOCTEST_STL_STRINGIFIER_H_INCLUDED
