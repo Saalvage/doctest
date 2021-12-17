@@ -142,12 +142,15 @@ This feature is provided to unit-test mpi-distributed code. It is **not** a way 
  * Later, maybe: have a general mechanism to represent assertions so we can separate the report format (console, xml, junit...) from the reporting strategy (sequential vs. MPI)
 
 
+
 # [Stringification of the STL (and beyond)](../../doctest/extensions/stl_stringifier.h)
+
 `<doctest/extensions/stl_stringify.h>` provides stringification for all components of the standard C++ library.
 
 The C++ standard version is automatically checked and types belonging to a newer, unsupported standard can never (accidentally) be enabled.
 
 ## Example
+
 ```cpp
 #include <doctest/extensions/stl_stringify.h>
 
@@ -163,14 +166,10 @@ path/to/test.cpp(5): ERROR: CHECK( primes == std::vector{ 2, 3, 5, 7, 11 } ) is 
 ```
 
 ## Configuration
+
 ### **DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES**
-By default a few very common standard classes are selected (among them are `vector`, `list`, `set` and `unordered_map`).
+By default, a few very common standard classes are selected (among them are `vector`, `list`, `set` and `unordered_map`).
 You can disable this standard selection by defining `DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES` before including the header.
-
-### **DOCTEST_STL_STRINGIFY_FLIP**
-By default all classes of which the corresponding flag has been defined are enabled, by defining `DOCTEST_STL_STRINGIFY_FLIP` this selection can be inverted, meaning that all classes are enabled, except those whose flag has been defined. Only defining `DOCTEST_STL_STRINGIFY_FLIP` is a simple way to enable stringification of all standard classes.
-
-(Note: The common includes are completely seperate from this switch, the semantics of `DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES` are unaffected by `DOCTEST_STL_STRINGIFY_FLIP`.)
 
 ### Header flags
 For every standard header there exists a flag with which classes contained within it can be enabled/disable (depending on `DOCTEST_STL_STRINGIFY_FLIP`).
@@ -205,6 +204,13 @@ For every standard header there exists a flag with which classes contained withi
 | [nullopt_t](https://en.cppreference.com/w/cpp/utility/optional/nullopt_t) | DOCTEST_STL_STRINGIFY_OPTIONAL | ❌ | `<optional>` | `nullopt` |
 | [type_info](https://en.cppreference.com/w/cpp/types/type_info) | DOCTEST_STL_STRINGIFY_TYPE_INFO | ❌ | `<typeinfo>` | (implementation defined) |
 | [chrono::time_point](https://en.cppreference.com/w/cpp/chrono/time_point) | DOCTEST_STL_STRINGIFY_CHRONO | ❌ | `<chrono>` | 1970-01-01 00:00:00.000 |
+
+### **DOCTEST_STL_STRINGIFY_FLIP**
+By default, the above flags enable stringification of classes. By defining `DOCTEST_STL_STRINGIFY_FLIP` this behavior can be inverted. All classes have stringification enabled at first and it can be disabled by defining their flag.
+
+Only defining `DOCTEST_STL_STRINGIFY_FLIP` is a simple way to enable stringification of all standard classes.
+
+(Note: Not defining `DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES` will enable classes, even if they are explicitly disabled. But it will never disable a class.)
 
 ---------------
 
