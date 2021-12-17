@@ -52,14 +52,18 @@ DOCTEST_STL_STRINGIFY_IMPL((template <DOCTEST_STL_DEBRACE temp>), temp, type, va
 
 #define DOCTEST_STL_ARRAY(temp, type) DOCTEST_STL_CONTAINER(temp, type, "[", "]")
 
+#if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_ARRAY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <array>
 DOCTEST_STL_ARRAY((typename T, size_t SIZE), (std::array<T, SIZE>))
 #endif
+#endif
 
+#ifdef __cpp_lib_span
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_SPAN) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <span>
 DOCTEST_STL_ARRAY((typename T, size_t SIZE), (std::span<T, SIZE>))
+#endif
 #endif
 
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_VALARRAY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
@@ -67,9 +71,11 @@ DOCTEST_STL_ARRAY((typename T, size_t SIZE), (std::span<T, SIZE>))
 DOCTEST_STL_ARRAY((typename T), (std::valarray<T>))
 #endif
 
+#if DOCTEST_CPP >= 11
 #if (defined(DOCTEST_STL_STRINGIFY_FLAG_INITIALIZER_LIST) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)) || !defined(DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES)
 #include <initializer_list>
 DOCTEST_STL_ARRAY((typename T), (std::initializer_list<T>))
+#endif
 #endif
 
 #define DOCTEST_STL_SIMPLE_CONTAINER(type) DOCTEST_STL_CONTAINER((typename T, typename ALLOC), (type<T, ALLOC>), "[", "]")
@@ -89,9 +95,11 @@ DOCTEST_STL_SIMPLE_CONTAINER(std::deque)
 DOCTEST_STL_SIMPLE_CONTAINER(std::list)
 #endif
 
+#if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_FORWARD_LIST) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <forward_list>
 DOCTEST_STL_SIMPLE_CONTAINER(std::forward_list)
+#endif
 #endif
 
 #define DOCTEST_STL_ADAPTER(temp, type, var, do) DOCTEST_STL_STRINGIFY_GEN(temp, type, internal) { \
@@ -123,6 +131,7 @@ DOCTEST_STL_ADAPTER((typename T, typename S, typename COMP),
     (std::priority_queue<T, S, COMP>), adptr, toString(adptr.top()); adptr.pop());
 #endif
 
+#if DOCTEST_CPP >= 11
 #if (defined(DOCTEST_STL_STRINGIFY_SET) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)) || !defined(DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES)
 #include <set>
 #define DOCTEST_STL_SET(type) DOCTEST_STL_CONTAINER((typename T, typename COMP, typename ALLOC), (type<T, COMP, ALLOC>), "{", "}")
@@ -152,6 +161,7 @@ DOCTEST_STL_MAP(std::multimap)
 DOCTEST_STL_UMAP(std::unordered_map)
 DOCTEST_STL_UMAP(std::unordered_multimap)
 #endif
+#endif
 
 #if defined(DOCTEST_STL_STRINGIFY_UTILITY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <utility>
@@ -169,6 +179,7 @@ inline static void _appendInt(String& s) {
 }
 DOCTEST_STL_NAMESPACES_END
 
+#if DOCTEST_CPP >= 14
 DOCTEST_STL_STRINGIFY_GEN((typename T, T... INTS), (std::integer_sequence<T, INTS...>), var) {
     String nums;
     if (sizeof...(INTS) != 0) {
@@ -176,12 +187,14 @@ DOCTEST_STL_STRINGIFY_GEN((typename T, T... INTS), (std::integer_sequence<T, INT
     }
     return "[" + nums + "]";
 }
+#endif
 
 DOCTEST_STL_STRINGIFY_GEN((typename T, typename S), (std::pair<T, S>), var) {
     return "(" + toString(var.first) + ", " + toString(var.second) + ")";
 }
 #endif
 
+#if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_TUPLE) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <tuple>
 DOCTEST_STL_NAMESPACES_BEGIN
@@ -205,14 +218,18 @@ DOCTEST_STL_STRINGIFY_GEN((typename... TYPES), (std::tuple<TYPES...>), var) {
     return "(" + data + ")";
 }
 #endif
+#endif
 
+#if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_RATIO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <ratio>
 DOCTEST_STL_STRINGIFY_GEN((std::intmax_t NUM, std::intmax_t DEN), (std::ratio<NUM, DEN>), var) {
     return toString(NUM) + "/" + toString(DEN);
 }
 #endif
+#endif
 
+#if DOCTEST_CPP >= 17
 #if defined(DOCTEST_STL_STRINGIFY_VARIANT) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <variant>
 DOCTEST_STL_STRINGIFY_GEN((typename... T), (std::variant<T...>), value) {
@@ -231,6 +248,7 @@ DOCTEST_STL_STRINGIFY_GEN((typename T), (std::optional<T>), var) {
 DOCTEST_STL_STRINGIFY(std::nullopt_t, ) {
     return "nullopt";
 }
+#endif
 #endif
 
 #if defined(DOCTEST_STL_STRINGIFY_TYPE_INFO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
