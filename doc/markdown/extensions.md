@@ -141,6 +141,71 @@ This feature is provided to unit-test mpi-distributed code. It is **not** a way 
  * Packaging: create a new target ```mpi_doctest```? (probably cleaner to depend explicitly on MPI for mpi/doctest.h)
  * Later, maybe: have a general mechanism to represent assertions so we can separate the report format (console, xml, junit...) from the reporting strategy (sequential vs. MPI)
 
+
+# [Stringification of the STL (and beyond)](../../doctest/extensions/stl_stringifier.h)
+`<doctest/extensions/stl_stringify.h>` provides stringification for all components of the standard C++ library.
+
+The C++ standard version is automatically checked and types belonging to a newer, unsupported standard can never (accidentally) be enabled.
+
+## Example
+```cpp
+#include <doctest/extensions/stl_stringify.h>
+
+TEST_CASE("Test prime generator") {
+    std::vector<int> primes = generatePrimes(5);
+    CHECK(primes == std::vector{ 2, 3, 5, 7, 11 });
+}
+```
+↓
+```
+path/to/test.cpp(5): ERROR: CHECK( primes == std::vector{ 2, 3, 5, 7, 11 } ) is NOT correct!
+  values: CHECK( [1, 2, 3, 5, 7] == [2, 3, 5, 7, 11] )
+```
+
+## Configuration
+### **DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES**
+By default a few very common standard classes are selected (among them are `vector`, `list`, `set` and `unordered_map`).
+You can disable this standard selection by defining `DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES` before including the header.
+
+### **DOCTEST_STL_STRINGIFY_FLIP**
+By default all classes of which the corresponding flag has been defined are enabled, by defining `DOCTEST_STL_STRINGIFY_FLIP` this selection can be inverted, meaning that all classes are enabled, except those whose flag has been defined. Only defining `DOCTEST_STL_STRINGIFY_FLIP` is a simple way to enable stringification of all standard classes.
+
+(Note: The common includes are completely seperate from this switch, the semantics of `DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES` are unaffected by `DOCTEST_STL_STRINGIFY_FLIP`.)
+
+### Header flags
+For every standard header there exists a flag with which classes contained within it can be enabled/disable (depending on `DOCTEST_STL_STRINGIFY_FLIP`).
+
+| Class | Flag | Default | Header | Example
+| - | - | - | - | - |
+| [array](https://en.cppreference.com/w/cpp/container/array) | DOCTEST_STL_STRINGIFY_FLAG_ARRAY | ❌ | `<array>` | `[1, 2, 3, 4]` |
+| [span](https://en.cppreference.com/w/cpp/container/span) | DOCTEST_STL_STRINGIFY_FLAG_SPAN | ❌ | `<span>` | `[1, 2, 3, 4]` |
+| [valarray](https://en.cppreference.com/w/cpp/numeric/valarray) | DOCTEST_STL_STRINGIFY_FLAG_VALARRAY | ❌ | `<valarray>` | `[1, 2, 3, 4]` |
+| [initializer_list](https://en.cppreference.com/w/cpp/utility/initializer_list) | DOCTEST_STL_STRINGIFY_FLAG_INITIALIZER_LIST | ✔️ | `<initializer_list>` | `[1, 2, 3, 4]` |
+| [vector](https://en.cppreference.com/w/cpp/container/vector) | DOCTEST_STL_STRINGIFY_FLAG_VECTOR | ✔️ | `<vector>` | `[1, 2, 3, 4]` |
+| [deque](https://en.cppreference.com/w/cpp/container/deque) | DOCTEST_STL_STRINGIFY_FLAG_DEQUE | ❌ | `<deque>` | `[1, 2, 3, 4]` |
+| [list](https://en.cppreference.com/w/cpp/container/list) | DOCTEST_STL_STRINGIFY_FLAG_LIST | ✔️ | `<list>` | `[1, 2, 3, 4]` |
+| [forward_list](https://en.cppreference.com/w/cpp/container/forward_list) | DOCTEST_STL_STRINGIFY_FLAG_FORWARD_LIST | ❌ | `<forward_list>` | `[1, 2, 3, 4]` |
+| [stack](https://en.cppreference.com/w/cpp/container/stack) | DOCTEST_STL_STRINGIFY_FLAG_STACK | ❌ | `<stack>` | `[1, 2, 3, 4]` |
+| [queue](https://en.cppreference.com/w/cpp/container/queue) | DOCTEST_STL_STRINGIFY_FLAG_QUEUE | ❌ | `<queue>` | `[1, 2, 3, 4]` |
+| [set](https://en.cppreference.com/w/cpp/container/set) | DOCTEST_STL_STRINGIFY_SET | ✔️ | `<set>` | `[1, 2, 3, 4]` |
+| [multiset](https://en.cppreference.com/w/cpp/container/multiset) | DOCTEST_STL_STRINGIFY_SET | ✔️ | `<set>` | `[1, 2, 3, 4]` |
+| [unordered_set](https://en.cppreference.com/w/cpp/container/unordered_set) | DOCTEST_STL_STRINGIFY_UNORDERED_SET | ❌ | `<unordered_set>` | `{1, 2, 3, 4}` |
+| [unordered_multiset](https://en.cppreference.com/w/cpp/container/unordered_multiset) | DOCTEST_STL_STRINGIFY_UNORDERED_SET | ❌ | `<unordered_set>` | `{1, 2, 3, 4}` |
+| [map](https://en.cppreference.com/w/cpp/container/map) | DOCTEST_STL_STRINGIFY_MAP | ❌ | `<map>` | `{(1, "one"), (2, "two"), (3, "three"), (4, "four")}` |
+| [multimap](https://en.cppreference.com/w/cpp/container/multimap) | DOCTEST_STL_STRINGIFY_MAP | ❌ | `<map>` | `{(1, "one"), (2, "two"), (3, "three"), (4, "four")}` |
+| [unordered_map](https://en.cppreference.com/w/cpp/container/unordered_map) | DOCTEST_STL_STRINGIFY_UNORDERED_MAP | ✔️ | `<unordered_map>` | `{(1, "one"), (2, "two"), (3, "three"), (4, "four")}` |
+| [unordered_multimap](https://en.cppreference.com/w/cpp/container/unordered_multimap) | DOCTEST_STL_STRINGIFY_UNORDERED_MAP | ✔️ | `<unordered_map>` | `{(1, "one"), (2, "two"), (3, "three"), (4, "four")}` |
+| [integer_sequence](https://en.cppreference.com/w/cpp/utility/integer_sequence) | DOCTEST_STL_STRINGIFY_UTILITY | ❌ | `<utility>` | `[1, 2, 3, 4]` |
+| [pair](https://en.cppreference.com/w/cpp/utility/pair) | DOCTEST_STL_STRINGIFY_UTILITY | ❌ | `<utility>` | `(1, "one")` |
+| [tuple](https://en.cppreference.com/w/cpp/utility/tuple) | DOCTEST_STL_STRINGIFY_TUPLE | ❌ | `<tuple>` | `(true, false, true, 1, "one")` |
+| [ratio](https://en.cppreference.com/w/cpp/numeric/ratio) | DOCTEST_STL_STRINGIFY_RATIO | ❌ | `<ratio>` | `1/100` | |
+| [variant](https://en.cppreference.com/w/cpp/utility/variant) | DOCTEST_STL_STRINGIFY_VARIANT | ❌ | `<variant>` | `1` (currently held value, stringified (`monostate` -> `monostate`)) |
+| [monostate](https://en.cppreference.com/w/cpp/utility/variant/monostate) | DOCTEST_STL_STRINGIFY_VARIANT | ❌ | `<variant>` | `monostate`
+| [optional](https://en.cppreference.com/w/cpp/utility/optional) | DOCTEST_STL_STRINGIFY_OPTIONAL | ❌ | `<optional>` | `1` (held value or nullopt, stringified) |
+| [nullopt_t](https://en.cppreference.com/w/cpp/utility/optional/nullopt_t) | DOCTEST_STL_STRINGIFY_OPTIONAL | ❌ | `<optional>` | `nullopt` |
+| [type_info](https://en.cppreference.com/w/cpp/types/type_info) | DOCTEST_STL_STRINGIFY_TYPE_INFO | ❌ | `<typeinfo>` | (implementation defined) |
+| [chrono::time_point](https://en.cppreference.com/w/cpp/chrono/time_point) | DOCTEST_STL_STRINGIFY_CHRONO | ❌ | `<chrono>` | 1970-01-01 00:00:00.000 |
+
 ---------------
 
 [Home](readme.md#reference)
