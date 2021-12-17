@@ -198,12 +198,12 @@ For every standard header there exists a flag with which classes contained withi
 | [pair](https://en.cppreference.com/w/cpp/utility/pair) | DOCTEST_STL_STRINGIFY_UTILITY | ❌ | `<utility>` | `(1, "one")` |
 | [tuple](https://en.cppreference.com/w/cpp/utility/tuple) | DOCTEST_STL_STRINGIFY_TUPLE | ❌ | `<tuple>` | `(true, false, true, 1, "one")` |
 | [ratio](https://en.cppreference.com/w/cpp/numeric/ratio) | DOCTEST_STL_STRINGIFY_RATIO | ❌ | `<ratio>` | `1/100` | |
-| [variant](https://en.cppreference.com/w/cpp/utility/variant) | DOCTEST_STL_STRINGIFY_VARIANT | ❌ | `<variant>` | `1` (currently held value, stringified (`monostate` -> `monostate`)) |
+| [variant](https://en.cppreference.com/w/cpp/utility/variant) | DOCTEST_STL_STRINGIFY_VARIANT | ❌ | `<variant>` | `1` (currently held value, stringified) |
 | [monostate](https://en.cppreference.com/w/cpp/utility/variant/monostate) | DOCTEST_STL_STRINGIFY_VARIANT | ❌ | `<variant>` | `monostate`
 | [optional](https://en.cppreference.com/w/cpp/utility/optional) | DOCTEST_STL_STRINGIFY_OPTIONAL | ❌ | `<optional>` | `1` (held value or nullopt, stringified) |
 | [nullopt_t](https://en.cppreference.com/w/cpp/utility/optional/nullopt_t) | DOCTEST_STL_STRINGIFY_OPTIONAL | ❌ | `<optional>` | `nullopt` |
 | [type_info](https://en.cppreference.com/w/cpp/types/type_info) | DOCTEST_STL_STRINGIFY_TYPE_INFO | ❌ | `<typeinfo>` | (implementation defined) |
-| [chrono::time_point](https://en.cppreference.com/w/cpp/chrono/time_point) | DOCTEST_STL_STRINGIFY_CHRONO | ❌ | `<chrono>` | 1970-01-01 00:00:00.000 |
+| [chrono::time_point](https://en.cppreference.com/w/cpp/chrono/time_point) | DOCTEST_STL_STRINGIFY_CHRONO | ❌ | `<chrono>` | `1970-01-01 00:00:00.000` |
 
 ### **DOCTEST_STL_STRINGIFY_FLIP**
 By default, the above flags enable stringification of classes. By defining `DOCTEST_STL_STRINGIFY_FLIP` this behavior can be inverted. All classes have stringification enabled at first and it can be disabled by defining their flag.
