@@ -212,6 +212,9 @@ Only defining `DOCTEST_STL_STRINGIFY_FLIP` is a simple way to enable stringifica
 
 (Note: Not defining `DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES` will enable classes, even if they are explicitly disabled. But it will never disable a class.)
 
+### Across translation units
+The header should be included in all source files containing test code and the flags should not vary among translation units. The results of not adhering to this are undefined.
+
 ---------------
 
 [Home](readme.md#reference)
