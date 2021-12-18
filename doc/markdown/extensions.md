@@ -186,6 +186,7 @@ For every standard header there exists a flag with which classes contained withi
 | [forward_list](https://en.cppreference.com/w/cpp/container/forward_list) | DOCTEST_STL_STRINGIFY_FLAG_FORWARD_LIST | ❌ | `<forward_list>` | `[1, 2, 3, 4]` |
 | [stack](https://en.cppreference.com/w/cpp/container/stack) | DOCTEST_STL_STRINGIFY_FLAG_STACK | ❌ | `<stack>` | `[1, 2, 3, 4]` |
 | [queue](https://en.cppreference.com/w/cpp/container/queue) | DOCTEST_STL_STRINGIFY_FLAG_QUEUE | ❌ | `<queue>` | `[1, 2, 3, 4]` |
+| [priority_queue](https://en.cppreference.com/w/cpp/container/priority_queue) | DOCTEST_STL_STRINGIFY_FLAG_QUEUE | ❌ | `<queue>` | `[1, 2, 3, 4]` |
 | [set](https://en.cppreference.com/w/cpp/container/set) | DOCTEST_STL_STRINGIFY_SET | ✔️ | `<set>` | `[1, 2, 3, 4]` |
 | [multiset](https://en.cppreference.com/w/cpp/container/multiset) | DOCTEST_STL_STRINGIFY_SET | ✔️ | `<set>` | `[1, 2, 3, 4]` |
 | [unordered_set](https://en.cppreference.com/w/cpp/container/unordered_set) | DOCTEST_STL_STRINGIFY_UNORDERED_SET | ❌ | `<unordered_set>` | `{1, 2, 3, 4}` |
