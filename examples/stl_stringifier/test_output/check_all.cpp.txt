@@ -1,0 +1,291 @@
+[doctest] run with "--help" for options
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  array stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  valarray stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  initializer_list stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  vector stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  deque stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  list stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  forward_list stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  set stringifications
+
+check_all.cpp(0): ERROR: {1, 2, 3}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  multiset stringifications
+
+check_all.cpp(0): ERROR: {1, 2, 3}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  unordered_set stringifications
+
+check_all.cpp(0): ERROR: {1, 2, 3}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  unordered_multiset stringifications
+
+check_all.cpp(0): ERROR: {1, 2, 3}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  span stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  stack stringifications deque
+
+check_all.cpp(0): ERROR: [2, 1, 0]
+
+check_all.cpp(0): ERROR: []
+
+check_all.cpp(0): ERROR: [3, 2, 1]
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  stack stringifications vector
+
+check_all.cpp(0): ERROR: [2, 1, 0]
+
+check_all.cpp(0): ERROR: []
+
+check_all.cpp(0): ERROR: [3, 2, 1]
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  stack stringifications list
+
+check_all.cpp(0): ERROR: [2, 1, 0]
+
+check_all.cpp(0): ERROR: []
+
+check_all.cpp(0): ERROR: [3, 2, 1]
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  queue stringifications deque
+
+check_all.cpp(0): ERROR: [0, 1, 2]
+
+check_all.cpp(0): ERROR: []
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  queue stringifications list
+
+check_all.cpp(0): ERROR: [0, 1, 2]
+
+check_all.cpp(0): ERROR: []
+
+check_all.cpp(0): ERROR: [1, 2, 3]
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  priority_queue stringifications deque
+
+check_all.cpp(0): ERROR: [2, 1, 0]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  priority_queue stringifications vector
+
+check_all.cpp(0): ERROR: [2, 1, 0]
+
+check_all.cpp(0): ERROR: []
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  map stringifications
+
+check_all.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  multimap stringifications
+
+check_all.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  unordered_map stringifications
+
+check_all.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  unordered_multimap stringifications
+
+check_all.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check_all.cpp(0): ERROR: {}
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  integer sequence stringifications
+
+check_all.cpp(0): ERROR: [1, 2, 3, 4]
+
+check_all.cpp(0): ERROR: []
+
+check_all.cpp(0): ERROR: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  pair stringifications
+
+check_all.cpp(0): ERROR: (0, "{null string}")
+
+check_all.cpp(0): ERROR: (1, "one")
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  tuple stringifications
+
+check_all.cpp(0): ERROR: (0, "{null string}")
+
+check_all.cpp(0): ERROR: (1, "one")
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  ratio stringifications
+
+check_all.cpp(0): ERROR: 1/1000000000000000000
+
+check_all.cpp(0): ERROR: 0/1
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  variant stringifications
+
+check_all.cpp(0): ERROR: ("hello")
+
+check_all.cpp(0): ERROR: (false)
+
+check_all.cpp(0): ERROR: (monostate)
+
+check_all.cpp(0): ERROR: monostate
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  optional stringifications
+
+check_all.cpp(0): ERROR: 5
+
+check_all.cpp(0): ERROR: nullopt
+
+check_all.cpp(0): ERROR: nullopt
+
+===============================================================================
+check_all.cpp(0):
+TEST SUITE: stl stringification
+TEST CASE:  chrono time_point stringification
+
+check_all.cpp(0): ERROR: 1970-01-01 00:00:00.0000000
+
+===============================================================================
+[doctest] test cases: 31 | 1 passed | 30 failed |
+[doctest] assertions: 69 | 1 passed | 68 failed |
+[doctest] Status: FAILURE!

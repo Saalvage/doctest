@@ -85,6 +85,22 @@
 #define DOCTEST_GCC 0
 #endif // DOCTEST_GCC
 
+#ifdef _MSVC_LANG
+#define DOCTEST_CPP_VER_DATE _MSVC_LANG
+#else
+#define DOCTEST_CPP_VER_DATE __cplusplus
+#endif
+
+#if DOCTEST_CPP_VER_DATE >= 202000L
+#define DOCTEST_CPP 20
+#elif DOCTEST_CPP_VER_DATE >= 201700L
+#define DOCTEST_CPP 17
+#elif DOCTEST_CPP_VER_DATE >= 201400L
+#define DOCTEST_CPP 14
+#else
+#define DOCTEST_CPP 97
+#endif
+
 // =================================================================================================
 // == COMPILER WARNINGS HELPERS ====================================================================
 // =================================================================================================
@@ -1990,7 +2006,7 @@ int registerReporter(const char* name, int priority, bool isReporter) {
     DOCTEST_CREATE_AND_REGISTER_FUNCTION(DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), decorators)
 
 // for registering tests in classes - requires C++17 for inline variables!
-#if __cplusplus >= 201703L || (DOCTEST_MSVC >= DOCTEST_COMPILER(19, 12, 0) && _MSVC_LANG >= 201703L)
+#if DOCTEST_CPP >= 17
 #define DOCTEST_TEST_CASE_CLASS(decorators)                                                        \
     DOCTEST_CREATE_AND_REGISTER_FUNCTION_IN_CLASS(DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_),           \
                                                   DOCTEST_ANONYMOUS(DOCTEST_ANON_PROXY_),          \

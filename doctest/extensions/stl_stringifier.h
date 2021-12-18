@@ -2,7 +2,7 @@
 #define DOCTEST_STL_STRINGIFIER_H_INCLUDED
 
 #ifndef DOCTEST_LIBRARY_INCLUDED
-#include "../doctest.h"
+#include "doctest/doctest.h"
 #endif
 
 #define DOCTEST_STL_DETAIL_NAMESPACE_NAME detail
@@ -68,7 +68,19 @@ DOCTEST_STL_ARRAY((typename T, size_t SIZE), (std::span<T, SIZE>))
 
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_VALARRAY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <valarray>
-DOCTEST_STL_ARRAY((typename T), (std::valarray<T>))
+DOCTEST_STL_STRINGIFY_GEN((typename T), (std::valarray<T>), var) {
+    if (var.size() == 0) { return "[]"; }
+    String s = "[";
+    bool first = true;
+    for (const auto& v : var) {
+        if (!first) {
+            s += ", ";
+        }
+        first = false;
+        s += toString(v);
+    }
+    return s + "]";
+}
 #endif
 
 #if DOCTEST_CPP >= 11
@@ -168,19 +180,19 @@ DOCTEST_STL_UMAP(std::unordered_multimap)
 #if DOCTEST_CPP >= 14
 DOCTEST_STL_NAMESPACES_BEGIN
 template <typename T>
-inline static void _appendInt(String& s) { }
+inline static void _appendInt(String&) { }
 
 template <typename T, T I, T... INTS>
 inline static void _appendInt(String& s) {
     s += toString(I);
     if (sizeof...(INTS) != 0) {
         s += ", ";
-        appendInt<T, INTS...>(s);
+        _appendInt<T, INTS...>(s);
     }
 }
 DOCTEST_STL_NAMESPACES_END
 
-DOCTEST_STL_STRINGIFY_GEN((typename T, T... INTS), (std::integer_sequence<T, INTS...>), var) {
+DOCTEST_STL_STRINGIFY_GEN((typename T, T... INTS), (std::integer_sequence<T, INTS...>), ) {
     String nums;
     if (sizeof...(INTS) != 0) {
         DOCTEST_STL_DETAIL_NAMESPACE_NAME::_appendInt<T, INTS...>(nums);
@@ -221,7 +233,7 @@ DOCTEST_STL_STRINGIFY_GEN((typename... TYPES), (std::tuple<TYPES...>), var) {
 
 #if defined(DOCTEST_STL_STRINGIFY_RATIO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <ratio>
-DOCTEST_STL_STRINGIFY_GEN((std::intmax_t NUM, std::intmax_t DEN), (std::ratio<NUM, DEN>), var) {
+DOCTEST_STL_STRINGIFY_GEN((intmax_t NUM, intmax_t DEN), (std::ratio<NUM, DEN>), ) {
     return toString(NUM) + "/" + toString(DEN);
 }
 #endif
@@ -258,7 +270,9 @@ DOCTEST_STL_STRINGIFY(std::type_info, value) {
 
 #if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_CHRONO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
+DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4866)
 #include <chrono>
+DOCTEST_MSVC_SUPPRESS_WARNING_POP
 #include <iomanip> // we don't *need* this, but I won't be writing my own time stringifier
 DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_point<CLOCK, DUR>), value) {
     namespace stc = std::chrono;
