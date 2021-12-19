@@ -234,7 +234,8 @@ DOCTEST_MSVC_SUPPRESS_WARNING(26812) // Prefer 'enum class' over 'enum'
     DOCTEST_MSVC_SUPPRESS_WARNING(4623)                                                            \
     DOCTEST_MSVC_SUPPRESS_WARNING(5039)                                                            \
     DOCTEST_MSVC_SUPPRESS_WARNING(5045)                                                            \
-    DOCTEST_MSVC_SUPPRESS_WARNING(5105)
+    DOCTEST_MSVC_SUPPRESS_WARNING(5105)                                                            \
+    DOCTEST_MSVC_SUPPRESS_WARNING(4738)
 
 #define DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END DOCTEST_MSVC_SUPPRESS_WARNING_POP
 

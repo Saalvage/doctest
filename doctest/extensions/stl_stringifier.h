@@ -17,12 +17,14 @@ DOCTEST_STL_NAMESPACES_BEGIN \
 DOCTEST_STL_DEBRACE funcTemp \
 inline String func(const DOCTEST_STL_DEBRACE type&); \
 DOCTEST_STL_NAMESPACES_END \
+namespace doctest { /* gcc bug forces this to be a proper namespace */ \
 template <DOCTEST_STL_DEBRACE specTemp> \
-struct doctest::StringMaker<DOCTEST_STL_DEBRACE type> { \
+struct StringMaker<DOCTEST_STL_DEBRACE type> { \
     static String convert(const DOCTEST_STL_DEBRACE type& value) { \
-        return doctest::DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(value); \
+        return DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(value); \
     } \
 }; \
+} \
 DOCTEST_STL_DEBRACE funcTemp \
 inline doctest::String doctest::DOCTEST_STL_DETAIL_NAMESPACE_NAME::func(const DOCTEST_STL_DEBRACE type& varName)
 
@@ -278,6 +280,7 @@ DOCTEST_STL_STRINGIFY(std::type_info, value) {
 DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4866)
 #include <chrono>
 DOCTEST_MSVC_SUPPRESS_WARNING_POP
+#include <ostream>
 #include <iomanip> // we don't *need* this, but I won't be writing my own time stringifier
 DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_point<CLOCK, DUR>), value) {
     namespace stc = std::chrono;

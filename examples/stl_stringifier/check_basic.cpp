@@ -38,8 +38,8 @@ TEST_ARRAY_ADAPTER(queue, list)
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, deque, ())
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, vector, ())
 
-TEST_MAP(map)
-TEST_MAP(multimap)
+TEST_MAP(map, TEST_DEBRACE_FAIL_CHECK)
+TEST_MAP(multimap, TEST_DEBRACE_FAIL_CHECK)
 
 TEST_CASE("pair stringifications") {
     FAIL_CHECK(pair<int, const char*>());
