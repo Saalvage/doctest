@@ -136,6 +136,7 @@ DOCTEST_STL_SIMPLE_CONTAINER(std::forward_list)
 #define DOCTEST_STL_SIMPLE_ADAPTER(name, top) DOCTEST_STL_ADAPTER((typename T, typename S), \
     (name<T, S>), adptr, toString(adptr.top()); adptr.pop())
 
+DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wstrict-overflow") // genuinely no clue
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_STACK) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <stack>
 DOCTEST_STL_SIMPLE_ADAPTER(std::stack, top)
@@ -147,6 +148,7 @@ DOCTEST_STL_SIMPLE_ADAPTER(std::queue, front)
 DOCTEST_STL_ADAPTER((typename T, typename S, typename COMP),
     (std::priority_queue<T, S, COMP>), adptr, toString(adptr.top()); adptr.pop())
 #endif
+DOCTEST_GCC_SUPPRESS_WARNING_POP
 
 #if (defined(DOCTEST_STL_STRINGIFY_SET) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)) || !defined(DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES)
 #include <set>
