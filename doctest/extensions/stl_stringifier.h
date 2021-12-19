@@ -55,14 +55,14 @@ DOCTEST_STL_STRINGIFY_IMPL((template <DOCTEST_STL_DEBRACE temp>), temp, type, va
 #if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_ARRAY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <array>
-DOCTEST_STL_ARRAY((typename T, size_t SIZE), (std::array<T, SIZE>))
+DOCTEST_STL_ARRAY((typename T, std::size_t SIZE), (std::array<T, SIZE>))
 #endif
 #endif
 
 #ifdef __cpp_lib_span
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_SPAN) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <span>
-DOCTEST_STL_ARRAY((typename T, size_t SIZE), (std::span<T, SIZE>))
+DOCTEST_STL_ARRAY((typename T, std::size_t SIZE), (std::span<T, SIZE>))
 #endif
 #endif
 
@@ -212,11 +212,11 @@ DOCTEST_STL_STRINGIFY_GEN((typename T, typename S), (std::pair<T, S>), var) {
 #if defined(DOCTEST_STL_STRINGIFY_TUPLE) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <tuple>
 DOCTEST_STL_NAMESPACES_BEGIN
-template <size_t I = 0, typename... TYPES>
+template <std::size_t I = 0, typename... TYPES>
 static typename std::enable_if<I == sizeof...(TYPES)>::type
 inline _appendTupleIndexed(String&, const std::tuple<TYPES...>&) { }
 
-template <size_t I = 0, typename... TYPES>
+template <std::size_t I = 0, typename... TYPES>
 static typename std::enable_if<I < sizeof...(TYPES)>::type
 inline _appendTupleIndexed(String& s, const std::tuple<TYPES...>& tuple) {
     s += toString(std::get<I>(tuple));
