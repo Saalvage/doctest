@@ -100,8 +100,10 @@
 #define DOCTEST_CPP 17
 #elif DOCTEST_CPP_VER_DATE >= 201400L
 #define DOCTEST_CPP 14
+#elif DOCTEST_CPP_VER_DATE >= 201100L
+#define DOCTEST_CPP 11
 #else
-#define DOCTEST_CPP 97
+#define DOCTEST_CPP 03
 #endif
 
 // =================================================================================================
