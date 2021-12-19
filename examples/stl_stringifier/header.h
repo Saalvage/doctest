@@ -1,3 +1,6 @@
+#ifndef DOCTEST_STL_STRINGIFY_TESTS_UTILITY_HEADER_INCLUDED
+#define DOCTEST_STL_STRINGIFY_TESTS_UTILITY_HEADER_INCLUDED
+
 #define DOCTEST_STL_STRINGIFY_FLIP
 #define DOCTEST_CONFIG_TREAT_CHAR_STAR_AS_STRING
 #include <doctest/extensions/stl_stringifier.h>
@@ -15,3 +18,5 @@ TEST_CASE(#type " stringifications") { \
     FAIL_CHECK(type<int, const char*>{ { 1, "one" }, { 2, "two" }, { 3, "three" }}); \
     FAIL_CHECK(type<int, const char*>()); \
 }
+
+#endif // DOCTEST_STL_STRINGIFY_TESTS_UTILITY_HEADER_INCLUDED

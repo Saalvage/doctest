@@ -69,6 +69,7 @@ DOCTEST_STL_ARRAY((typename T, std::size_t SIZE), (std::span<T, SIZE>))
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_VALARRAY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <valarray>
 DOCTEST_STL_STRINGIFY_GEN((typename T), (std::valarray<T>), var) {
+    // this only exists because MSVC's STL is broken
     if (var.size() == 0) { return "[]"; }
     String s = "[";
     bool first = true;
@@ -281,16 +282,16 @@ DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_poi
     stc::system_clock::time_point sctp = stc::system_clock::now() + stc::duration_cast<stc::system_clock::duration>(value - CLOCK::now());
     time_t t = stc::system_clock::to_time_t(sctp);
     stc::system_clock::rep millis = stc::duration_cast<stc::milliseconds>(sctp.time_since_epoch()).count();
-    std::ostream& ss = detail::tlssPush();
-#ifdef _CRT_SECURE_NO_WARNINGS
-    #define DOCTEST_SECURE_NO_WARNINGS_PREV_DEFINED
+    tm tm;
+#ifdef _MSC_VER
+    if (localtime_s(&tm, &t) != 0) {
+        return "FAILURE TO GET TIME";
+    }
 #else
-    #define _CRT_SECURE_NO_WARNINGS
+    tm = *localtime(&t);
 #endif
-    ss << std::put_time(localtime(&t), "%F %T") << '.' << std::setfill('0') << std::setw(3) << (millis % 1000) << " (local time)";
-#ifndef DOCTEST_SECURE_NO_WARNINGS_PREV_DEFINED
-    #undef _CRT_SECURE_NO_WARNINGS
-#endif
+    std::ostream& ss = detail::tlssPush();
+    ss << std::put_time(&tm, "%F %T") << '.' << std::setfill('0') << std::setw(3) << (millis % 1000) << " (local time)";
     return detail::tlssPop();
 }
 #endif
