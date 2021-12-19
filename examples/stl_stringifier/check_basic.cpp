@@ -30,13 +30,13 @@ TEST_CASE(#type " stringifications " #underlying) { \
         FAIL_CHECK(type<int, underlying<int>>(ints)); \
 ))
 
+DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wstrict-overflow") // genuinely no clue
 TEST_ARRAY_ADAPTER(stack, deque)
 TEST_ARRAY_ADAPTER(stack, vector)
 TEST_ARRAY_ADAPTER(stack, list)
 TEST_ARRAY_ADAPTER(queue, deque)
 TEST_ARRAY_ADAPTER(queue, list)
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, deque, ())
-DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wstrict-overflow") // genuinely no clue
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, vector, ())
 DOCTEST_GCC_SUPPRESS_WARNING_POP
 
