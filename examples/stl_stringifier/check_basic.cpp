@@ -36,7 +36,7 @@ TEST_ARRAY_ADAPTER(stack, list)
 TEST_ARRAY_ADAPTER(queue, deque)
 TEST_ARRAY_ADAPTER(queue, list)
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, deque, ())
-DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Werror=strict-overflow") // genuinely no clue
+DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wstrict-overflow") // genuinely no clue
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, vector, ())
 DOCTEST_GCC_SUPPRESS_WARNING_POP
 
