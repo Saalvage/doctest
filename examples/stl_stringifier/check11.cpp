@@ -5,7 +5,7 @@ TEST_SUITE("stl stringification C++11") {
 using namespace std;
 
 TEST_CASE("array stringifications") {
-    FAIL_CHECK(array<int, 3>{ 1, 2, 3 });
+    FAIL_CHECK(array<int, 3>{{ 1, 2, 3 }});
     FAIL_CHECK(array<int, 0>{ });
 }
 
@@ -37,7 +37,7 @@ TEST_CASE("ratio stringifications") {
     FAIL_CHECK(ratio<0, 1>());
 }
 
-using namespace chrono;
+using namespace std::chrono;
 TEST_CASE_TEMPLATE("chrono time_point stringification",
     T, system_clock, high_resolution_clock, steady_clock) {
 #if !defined(__GNUC__) || __GNUC__ >= 5

@@ -14,20 +14,20 @@ TEST_ARRAY_TYPE(multiset)
 
 #define TEST_ARRAY_ADAPTER_IMPL(type, underlying, extra) \
 TEST_CASE(#type " stringifications " #underlying) { \
-    type<int, underlying<int>> t; \
-    for (int i = 0; i < 3; i++) { \
+    type<unsigned, underlying<unsigned>> t; \
+    for (unsigned i = 0; i < 3; i++) { \
         t.push(i); \
     } \
     FAIL_CHECK(t); \
-    FAIL_CHECK(type<int, underlying<int>>()); \
+    FAIL_CHECK(type<unsigned, underlying<unsigned>>()); \
  \
     DOCTEST_STL_DEBRACE extra \
 }
 
 #define TEST_ARRAY_ADAPTER(type, underlying) \
     TEST_ARRAY_ADAPTER_IMPL(type, underlying, (\
-        underlying<int> ints{ 1, 2, 3 }; \
-        FAIL_CHECK(type<int, underlying<int>>(ints)); \
+        underlying<unsigned> ints{ 1, 2, 3 }; \
+        FAIL_CHECK(type<unsigned, underlying<unsigned>>(ints)); \
 ))
 
 TEST_ARRAY_ADAPTER(stack, deque)
