@@ -129,7 +129,7 @@ DOCTEST_STL_SIMPLE_CONTAINER(std::forward_list)
 }
 
 #define DOCTEST_STL_SIMPLE_ADAPTER(name, top) DOCTEST_STL_ADAPTER((typename T, typename S), \
-    (name<T, S>), adptr, toString(adptr.top()); adptr.pop());
+    (name<T, S>), adptr, toString(adptr.top()); adptr.pop())
 
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_STACK) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <stack>
@@ -140,7 +140,7 @@ DOCTEST_STL_SIMPLE_ADAPTER(std::stack, top)
 #include <queue>
 DOCTEST_STL_SIMPLE_ADAPTER(std::queue, front)
 DOCTEST_STL_ADAPTER((typename T, typename S, typename COMP),
-    (std::priority_queue<T, S, COMP>), adptr, toString(adptr.top()); adptr.pop());
+    (std::priority_queue<T, S, COMP>), adptr, toString(adptr.top()); adptr.pop())
 #endif
 
 #if (defined(DOCTEST_STL_STRINGIFY_SET) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)) || !defined(DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES)
@@ -282,7 +282,15 @@ DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_poi
     time_t t = stc::system_clock::to_time_t(sctp);
     stc::system_clock::rep millis = stc::duration_cast<stc::milliseconds>(sctp.time_since_epoch()).count();
     std::ostream& ss = detail::tlssPush();
+#ifdef _CRT_SECURE_NO_WARNINGS
+    #define DOCTEST_SECURE_NO_WARNINGS_PREV_DEFINED
+#else
+    #define _CRT_SECURE_NO_WARNINGS
+#endif
     ss << std::put_time(localtime(&t), "%F %T") << '.' << std::setfill('0') << std::setw(3) << (millis % 1000) << " (local time)";
+#ifndef DOCTEST_SECURE_NO_WARNINGS_PREV_DEFINED
+    #undef _CRT_SECURE_NO_WARNINGS
+#endif
     return detail::tlssPop();
 }
 #endif
