@@ -55,6 +55,7 @@ DOCTEST_STL_STRINGIFY_IMPL((template <DOCTEST_STL_DEBRACE temp>), temp, type, va
 #define DOCTEST_STL_ARRAY(temp, type) DOCTEST_STL_CONTAINER(temp, type, "[", "]")
 
 DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_BEGIN
+DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wstrict-overflow") // genuinely no clue
 
 #if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_ARRAY) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
@@ -136,7 +137,6 @@ DOCTEST_STL_SIMPLE_CONTAINER(std::forward_list)
 #define DOCTEST_STL_SIMPLE_ADAPTER(name, top) DOCTEST_STL_ADAPTER((typename T, typename S), \
     (name<T, S>), adptr, toString(adptr.top()); adptr.pop())
 
-DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wstrict-overflow") // genuinely no clue
 #if defined(DOCTEST_STL_STRINGIFY_FLAG_STACK) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <stack>
 DOCTEST_STL_SIMPLE_ADAPTER(std::stack, top)
@@ -148,7 +148,6 @@ DOCTEST_STL_SIMPLE_ADAPTER(std::queue, front)
 DOCTEST_STL_ADAPTER((typename T, typename S, typename COMP),
     (std::priority_queue<T, S, COMP>), adptr, toString(adptr.top()); adptr.pop())
 #endif
-DOCTEST_GCC_SUPPRESS_WARNING_POP
 
 #if (defined(DOCTEST_STL_STRINGIFY_SET) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)) || !defined(DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES)
 #include <set>
@@ -304,6 +303,7 @@ DOCTEST_STL_STRINGIFY_GEN((typename CLOCK, typename DUR), (std::chrono::time_poi
 #endif
 #endif
 
+DOCTEST_GCC_SUPPRESS_WARNING_POP
 DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 
 #endif // DOCTEST_STL_STRINGIFIER_H_INCLUDED
