@@ -11,6 +11,6 @@ check14.cpp(0): ERROR: []
 check14.cpp(0): ERROR: [0, 1, 2]
 
 ===============================================================================
-[doctest] test cases: 2 | 1 passed | 1 failed |
-[doctest] assertions: 4 | 1 passed | 3 failed |
+[doctest] test cases: 1 | 0 passed | 1 failed |
+[doctest] assertions: 3 | 0 passed | 3 failed |
 [doctest] Status: FAILURE!
