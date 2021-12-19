@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="stl_stringify" errors="0" failures="0" tests="19">
+    <testcase classname="check11.cpp" name="array stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="initializer_list stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="forward_list stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="unordered_set stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="unordered_multiset stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="unordered_map stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="unordered_multimap stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="tuple stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="ratio stringifications" status="run"/>
+  </testsuite>
+</testsuites>

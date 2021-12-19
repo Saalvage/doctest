@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="stl_stringify" errors="0" failures="0" tests="7">
+    <testcase classname="check17.cpp" name="variant stringifications" status="run"/>
+    <testcase classname="check17.cpp" name="optional stringifications" status="run"/>
+  </testsuite>
+</testsuites>

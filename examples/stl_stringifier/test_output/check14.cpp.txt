@@ -1,0 +1,16 @@
+[doctest] run with "--help" for options
+===============================================================================
+check14.cpp(0):
+TEST SUITE: stl stringification C++14
+TEST CASE:  integer sequence stringifications
+
+check14.cpp(0): ERROR: [2, 3, 5, 7]
+
+check14.cpp(0): ERROR: []
+
+check14.cpp(0): ERROR: [0, 1, 2]
+
+===============================================================================
+[doctest] test cases: 2 | 1 passed | 1 failed |
+[doctest] assertions: 4 | 1 passed | 3 failed |
+[doctest] Status: FAILURE!

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="stl_stringify" errors="0" failures="0" tests="4">
+    <testcase classname="check14.cpp" name="integer sequence stringifications" status="run"/>
+    <testcase classname="check14.cpp" name="chrono time_point stringification" status="run"/>
+  </testsuite>
+</testsuites>

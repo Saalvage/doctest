@@ -143,7 +143,6 @@ DOCTEST_STL_ADAPTER((typename T, typename S, typename COMP),
     (std::priority_queue<T, S, COMP>), adptr, toString(adptr.top()); adptr.pop());
 #endif
 
-#if DOCTEST_CPP >= 11
 #if (defined(DOCTEST_STL_STRINGIFY_SET) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)) || !defined(DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES)
 #include <set>
 #define DOCTEST_STL_SET(type) DOCTEST_STL_CONTAINER((typename T, typename COMP, typename ALLOC), (type<T, COMP, ALLOC>), "{", "}")
@@ -151,12 +150,14 @@ DOCTEST_STL_SET(std::set)
 DOCTEST_STL_SET(std::multiset)
 #endif
 
+#if DOCTEST_CPP >= 11
 #if defined(DOCTEST_STL_STRINGIFY_UNORDERED_SET) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <unordered_set>
 #define DOCTEST_STL_USET(type) DOCTEST_STL_CONTAINER((typename T, typename HASH, typename EQ, typename ALLOC), \
     (type<T, HASH, EQ, ALLOC>), "{", "}")
 DOCTEST_STL_USET(std::unordered_set)
 DOCTEST_STL_USET(std::unordered_multiset)
+#endif
 #endif
 
 #if defined(DOCTEST_STL_STRINGIFY_MAP) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
@@ -166,6 +167,7 @@ DOCTEST_STL_MAP(std::map)
 DOCTEST_STL_MAP(std::multimap)
 #endif
 
+#if DOCTEST_CPP >= 11
 #if (defined(DOCTEST_STL_STRINGIFY_UNORDERED_MAP) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)) || !defined(DOCTEST_STL_STRINGIFY_NO_COMMON_INCLUDES)
 #include <unordered_map>
 #define DOCTEST_STL_UMAP(name) DOCTEST_STL_CONTAINER((typename T, typename S, typename HASH, typename EQ, typename ALLOC), \
@@ -211,17 +213,17 @@ DOCTEST_STL_STRINGIFY_GEN((typename T, typename S), (std::pair<T, S>), var) {
 #include <tuple>
 DOCTEST_STL_NAMESPACES_BEGIN
 template <size_t I = 0, typename... TYPES>
-static std::enable_if<I == sizeof...(TYPES)>::type
-inline _appendTupleIndexed(String& s, const std::tuple<TYPES...>& tuple) { }
+static typename std::enable_if<I == sizeof...(TYPES)>::type
+inline _appendTupleIndexed(String&, const std::tuple<TYPES...>&) { }
 
 template <size_t I = 0, typename... TYPES>
-static std::enable_if < I < sizeof...(TYPES)>::type
+static typename std::enable_if<I < sizeof...(TYPES)>::type
 inline _appendTupleIndexed(String& s, const std::tuple<TYPES...>& tuple) {
     s += toString(std::get<I>(tuple));
     if (I + 1 < sizeof...(TYPES)) {
         s += ", ";
     }
-    appendTupleIndexed<I + 1, TYPES...>(s, tuple);
+    _appendTupleIndexed<I + 1, TYPES...>(s, tuple);
 }
 DOCTEST_STL_NAMESPACES_END
 
@@ -243,7 +245,7 @@ DOCTEST_STL_STRINGIFY_GEN((intmax_t NUM, intmax_t DEN), (std::ratio<NUM, DEN>), 
 #if defined(DOCTEST_STL_STRINGIFY_VARIANT) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 #include <variant>
 DOCTEST_STL_STRINGIFY_GEN((typename... T), (std::variant<T...>), value) {
-    return "(" + std::visit([](auto&& val) { return toString(val); }, value) + ")";
+    return std::visit([](auto&& val) { return toString(val); }, value);
 }
 DOCTEST_STL_STRINGIFY(std::monostate, ) {
     return "monostate";

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctest binary="stl_stringify">
+  <Options order_by="file" rand_seed="0" first="0" last="4294967295" abort_after="0" subcase_filter_levels="2147483647" case_sensitive="false" no_throw="false" no_skip="false"/>
+  <TestSuite name="stl stringification basic">
+    <TestCase name="valarray stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="vector stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="deque stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="list stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="set stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {1, 2, 3}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="multiset stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {1, 2, 3}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="stack stringifications deque" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [2, 1, 0]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [3, 2, 1]
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="3" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="stack stringifications vector" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [2, 1, 0]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [3, 2, 1]
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="3" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="stack stringifications list" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [2, 1, 0]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [3, 2, 1]
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="3" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="queue stringifications deque" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [0, 1, 2]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="3" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="queue stringifications list" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [0, 1, 2]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="3" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="priority_queue stringifications deque" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [2, 1, 0]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="priority_queue stringifications vector" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          [2, 1, 0]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="map stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {(1, "one"), (2, "two"), (3, "three")}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="multimap stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {(1, "one"), (2, "two"), (3, "three")}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="pair stringifications" filename="check_basic.cpp" line="0">
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          (0, "{null string}")
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check_basic.cpp" line="0">
+        <Text>
+          (1, "one")
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="typeinfo stringifications" filename="check_basic.cpp" line="0">
+      <OverallResultsAsserts successes="1" failures="0" test_case_success="true"/>
+    </TestCase>
+  </TestSuite>
+  <OverallResultsAsserts successes="1" failures="37"/>
+  <OverallResultsTestCases successes="1" failures="16"/>
+</doctest>

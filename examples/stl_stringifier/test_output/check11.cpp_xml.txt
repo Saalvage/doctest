@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctest binary="stl_stringify">
+  <Options order_by="file" rand_seed="0" first="0" last="4294967295" abort_after="0" subcase_filter_levels="2147483647" case_sensitive="false" no_throw="false" no_skip="false"/>
+  <TestSuite name="stl stringification C++11">
+    <TestCase name="array stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="initializer_list stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="forward_list stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          [1, 2, 3]
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          []
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="unordered_set stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {1, 2, 3}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="unordered_multiset stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {1, 2, 3}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="unordered_map stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {(1, "one"), (2, "two"), (3, "three")}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="unordered_multimap stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {(1, "one"), (2, "two"), (3, "three")}
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          {}
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="tuple stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          ()
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          (0, "{null string}", false, false, false)
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          (1, "one", false, true, true)
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="3" test_case_success="false"/>
+    </TestCase>
+    <TestCase name="ratio stringifications" filename="check11.cpp" line="0">
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          1/1000000000000000000
+        </Text>
+      </Message>
+      <Message type="ERROR" filename="check11.cpp" line="0">
+        <Text>
+          0/1
+        </Text>
+      </Message>
+      <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
+    </TestCase>
+  </TestSuite>
+  <OverallResultsAsserts successes="0" failures="19"/>
+  <OverallResultsTestCases successes="0" failures="9"/>
+</doctest>

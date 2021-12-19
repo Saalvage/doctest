@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="stl_stringify" errors="0" failures="0" tests="38">
+    <testcase classname="check_basic.cpp" name="valarray stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="vector stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="deque stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="list stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="set stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="multiset stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="stack stringifications deque" status="run"/>
+    <testcase classname="check_basic.cpp" name="stack stringifications vector" status="run"/>
+    <testcase classname="check_basic.cpp" name="stack stringifications list" status="run"/>
+    <testcase classname="check_basic.cpp" name="queue stringifications deque" status="run"/>
+    <testcase classname="check_basic.cpp" name="queue stringifications list" status="run"/>
+    <testcase classname="check_basic.cpp" name="priority_queue stringifications deque" status="run"/>
+    <testcase classname="check_basic.cpp" name="priority_queue stringifications vector" status="run"/>
+    <testcase classname="check_basic.cpp" name="map stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="multimap stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="pair stringifications" status="run"/>
+    <testcase classname="check_basic.cpp" name="typeinfo stringifications" status="run"/>
+  </testsuite>
+</testsuites>

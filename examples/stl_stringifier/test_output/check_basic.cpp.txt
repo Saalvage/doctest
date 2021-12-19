@@ -1,0 +1,159 @@
+[doctest] run with "--help" for options
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  valarray stringifications
+
+check_basic.cpp(0): ERROR: [1, 2, 3]
+
+check_basic.cpp(0): ERROR: []
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  vector stringifications
+
+check_basic.cpp(0): ERROR: [1, 2, 3]
+
+check_basic.cpp(0): ERROR: []
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  deque stringifications
+
+check_basic.cpp(0): ERROR: [1, 2, 3]
+
+check_basic.cpp(0): ERROR: []
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  list stringifications
+
+check_basic.cpp(0): ERROR: [1, 2, 3]
+
+check_basic.cpp(0): ERROR: []
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  set stringifications
+
+check_basic.cpp(0): ERROR: {1, 2, 3}
+
+check_basic.cpp(0): ERROR: {}
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  multiset stringifications
+
+check_basic.cpp(0): ERROR: {1, 2, 3}
+
+check_basic.cpp(0): ERROR: {}
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  stack stringifications deque
+
+check_basic.cpp(0): ERROR: [2, 1, 0]
+
+check_basic.cpp(0): ERROR: []
+
+check_basic.cpp(0): ERROR: [3, 2, 1]
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  stack stringifications vector
+
+check_basic.cpp(0): ERROR: [2, 1, 0]
+
+check_basic.cpp(0): ERROR: []
+
+check_basic.cpp(0): ERROR: [3, 2, 1]
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  stack stringifications list
+
+check_basic.cpp(0): ERROR: [2, 1, 0]
+
+check_basic.cpp(0): ERROR: []
+
+check_basic.cpp(0): ERROR: [3, 2, 1]
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  queue stringifications deque
+
+check_basic.cpp(0): ERROR: [0, 1, 2]
+
+check_basic.cpp(0): ERROR: []
+
+check_basic.cpp(0): ERROR: [1, 2, 3]
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  queue stringifications list
+
+check_basic.cpp(0): ERROR: [0, 1, 2]
+
+check_basic.cpp(0): ERROR: []
+
+check_basic.cpp(0): ERROR: [1, 2, 3]
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  priority_queue stringifications deque
+
+check_basic.cpp(0): ERROR: [2, 1, 0]
+
+check_basic.cpp(0): ERROR: []
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  priority_queue stringifications vector
+
+check_basic.cpp(0): ERROR: [2, 1, 0]
+
+check_basic.cpp(0): ERROR: []
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  map stringifications
+
+check_basic.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check_basic.cpp(0): ERROR: {}
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  multimap stringifications
+
+check_basic.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check_basic.cpp(0): ERROR: {}
+
+===============================================================================
+check_basic.cpp(0):
+TEST SUITE: stl stringification basic
+TEST CASE:  pair stringifications
+
+check_basic.cpp(0): ERROR: (0, "{null string}")
+
+check_basic.cpp(0): ERROR: (1, "one")
+
+===============================================================================
+[doctest] test cases: 17 | 1 passed | 16 failed |
+[doctest] assertions: 38 | 1 passed | 37 failed |
+[doctest] Status: FAILURE!

@@ -1,0 +1,29 @@
+[doctest] run with "--help" for options
+===============================================================================
+check17.cpp(0):
+TEST SUITE: stl stringification C++17
+TEST CASE:  variant stringifications
+
+check17.cpp(0): ERROR: "hello"
+
+check17.cpp(0): ERROR: false
+
+check17.cpp(0): ERROR: monostate
+
+check17.cpp(0): ERROR: monostate
+
+===============================================================================
+check17.cpp(0):
+TEST SUITE: stl stringification C++17
+TEST CASE:  optional stringifications
+
+check17.cpp(0): ERROR: 5
+
+check17.cpp(0): ERROR: nullopt
+
+check17.cpp(0): ERROR: nullopt
+
+===============================================================================
+[doctest] test cases: 2 | 0 passed | 2 failed |
+[doctest] assertions: 7 | 0 passed | 7 failed |
+[doctest] Status: FAILURE!

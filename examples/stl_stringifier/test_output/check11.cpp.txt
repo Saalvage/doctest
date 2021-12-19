@@ -1,0 +1,88 @@
+[doctest] run with "--help" for options
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  array stringifications
+
+check11.cpp(0): ERROR: [1, 2, 3]
+
+check11.cpp(0): ERROR: []
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  initializer_list stringifications
+
+check11.cpp(0): ERROR: [1, 2, 3]
+
+check11.cpp(0): ERROR: []
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  forward_list stringifications
+
+check11.cpp(0): ERROR: [1, 2, 3]
+
+check11.cpp(0): ERROR: []
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  unordered_set stringifications
+
+check11.cpp(0): ERROR: {1, 2, 3}
+
+check11.cpp(0): ERROR: {}
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  unordered_multiset stringifications
+
+check11.cpp(0): ERROR: {1, 2, 3}
+
+check11.cpp(0): ERROR: {}
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  unordered_map stringifications
+
+check11.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check11.cpp(0): ERROR: {}
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  unordered_multimap stringifications
+
+check11.cpp(0): ERROR: {(1, "one"), (2, "two"), (3, "three")}
+
+check11.cpp(0): ERROR: {}
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  tuple stringifications
+
+check11.cpp(0): ERROR: ()
+
+check11.cpp(0): ERROR: (0, "{null string}", false, false, false)
+
+check11.cpp(0): ERROR: (1, "one", false, true, true)
+
+===============================================================================
+check11.cpp(0):
+TEST SUITE: stl stringification C++11
+TEST CASE:  ratio stringifications
+
+check11.cpp(0): ERROR: 1/1000000000000000000
+
+check11.cpp(0): ERROR: 0/1
+
+===============================================================================
+[doctest] test cases:  9 | 0 passed |  9 failed |
+[doctest] assertions: 19 | 0 passed | 19 failed |
+[doctest] Status: FAILURE!
