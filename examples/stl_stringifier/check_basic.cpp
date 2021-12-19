@@ -14,20 +14,20 @@ TEST_ARRAY_TYPE(multiset)
 
 #define TEST_ARRAY_ADAPTER_IMPL(type, underlying, extra) \
 TEST_CASE(#type " stringifications " #underlying) { \
-    type<unsigned, underlying<unsigned>> t; \
-    for (unsigned i = 0; i < 3; i++) { \
+    type<int, underlying<int>> t; \
+    for (int i = 0; i < 3; i++) { \
         t.push(i); \
     } \
     FAIL_CHECK(t); \
-    FAIL_CHECK(type<unsigned, underlying<unsigned>>()); \
+    FAIL_CHECK(type<int, underlying<int>>()); \
  \
     DOCTEST_STL_DEBRACE extra \
 }
 
 #define TEST_ARRAY_ADAPTER(type, underlying) \
     TEST_ARRAY_ADAPTER_IMPL(type, underlying, (\
-        underlying<unsigned> ints{ 1, 2, 3 }; \
-        FAIL_CHECK(type<unsigned, underlying<unsigned>>(ints)); \
+        underlying<int> ints{ 1, 2, 3 }; \
+        FAIL_CHECK(type<int, underlying<int>>(ints)); \
 ))
 
 TEST_ARRAY_ADAPTER(stack, deque)
@@ -36,7 +36,9 @@ TEST_ARRAY_ADAPTER(stack, list)
 TEST_ARRAY_ADAPTER(queue, deque)
 TEST_ARRAY_ADAPTER(queue, list)
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, deque, ())
+DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Werror=strict-overflow") // genuinely no clue
 TEST_ARRAY_ADAPTER_IMPL(priority_queue, vector, ())
+DOCTEST_GCC_SUPPRESS_WARNING_POP
 
 TEST_MAP(map, TEST_DEBRACE_FAIL_CHECK)
 TEST_MAP(multimap, TEST_DEBRACE_FAIL_CHECK)

@@ -37,10 +37,18 @@ TEST_CASE("ratio stringifications") {
     FAIL_CHECK(ratio<0, 1>());
 }
 
+#if !defined(__GNUC__) || __GNUC__ >= 5
+    #define TEST_CHRONO_AVAILABLE
+#endif
+
+#ifdef TEST_CHRONO_AVAILABLE
 using namespace std::chrono;
+#else
+struct system_clock; struct high_resolution_clock; struct steady_clock;
+#endif
 TEST_CASE_TEMPLATE("chrono time_point stringification",
     T, system_clock, high_resolution_clock, steady_clock) {
-#if !defined(__GNUC__) || __GNUC__ >= 5
+#ifdef TEST_CHRONO_AVAILABLE
     CHECK(doctest::toString(time_point<T>()) != "{?}");
     CHECK(doctest::toString(T::now()) != "{?}");
 #else
