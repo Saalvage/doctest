@@ -9,9 +9,9 @@ macro(doctest_test_std ver)
 endmacro()
 
 doctest_test_std(11)
-doctest_test_std(14)
-doctest_test_std(17)
-doctest_test_std(20)
+#doctest_test_std(14)
+#doctest_test_std(17)
+#doctest_test_std(20)
 
 message("Latest avaiable C++ version is C++" ${latestVer})
 
