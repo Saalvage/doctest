@@ -275,7 +275,7 @@ DOCTEST_STL_STRINGIFY(std::type_info, value) {
 }
 #endif
 
-#if DOCTEST_CPP >= 11
+#if DOCTEST_CPP >= 11 && (DOCTEST_GCC == 0 || DOCTEST_GCC >= DOCTEST_COMPILER(5, 0, 0)) // gcc only supports put_time >= v5
 #if defined(DOCTEST_STL_STRINGIFY_CHRONO) ^ defined(DOCTEST_STL_STRINGIFY_FLIP)
 DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4866)
 #include <chrono>

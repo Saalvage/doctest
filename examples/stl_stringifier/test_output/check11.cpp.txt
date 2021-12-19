@@ -61,6 +61,6 @@ check11.cpp(0): ERROR: 1/1000000000000000000
 check11.cpp(0): ERROR: 0/1
 
 ===============================================================================
-[doctest] test cases:  9 | 2 passed |  7 failed |
-[doctest] assertions: 19 | 6 passed | 13 failed |
+[doctest] test cases: 12 |  5 passed |  7 failed |
+[doctest] assertions: 25 | 12 passed | 13 failed |
 [doctest] Status: FAILURE!

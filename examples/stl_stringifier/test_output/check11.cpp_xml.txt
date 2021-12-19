@@ -94,7 +94,16 @@
       </Message>
       <OverallResultsAsserts successes="0" failures="2" test_case_success="false"/>
     </TestCase>
+    <TestCase name="chrono time_point stringification&lt;>" filename="check11.cpp" line="0">
+      <OverallResultsAsserts successes="2" failures="0" test_case_success="true"/>
+    </TestCase>
+    <TestCase name="chrono time_point stringification&lt;>" filename="check11.cpp" line="0">
+      <OverallResultsAsserts successes="2" failures="0" test_case_success="true"/>
+    </TestCase>
+    <TestCase name="chrono time_point stringification&lt;>" filename="check11.cpp" line="0">
+      <OverallResultsAsserts successes="2" failures="0" test_case_success="true"/>
+    </TestCase>
   </TestSuite>
-  <OverallResultsAsserts successes="6" failures="13"/>
-  <OverallResultsTestCases successes="2" failures="7"/>
+  <OverallResultsAsserts successes="12" failures="13"/>
+  <OverallResultsTestCases successes="5" failures="7"/>
 </doctest>

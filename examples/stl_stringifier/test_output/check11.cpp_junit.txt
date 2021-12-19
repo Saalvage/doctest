@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="stl_stringify" errors="0" failures="0" tests="19">
+  <testsuite name="stl_stringify" errors="0" failures="0" tests="25">
     <testcase classname="check11.cpp" name="array stringifications" status="run"/>
     <testcase classname="check11.cpp" name="initializer_list stringifications" status="run"/>
     <testcase classname="check11.cpp" name="forward_list stringifications" status="run"/>
@@ -10,5 +10,8 @@
     <testcase classname="check11.cpp" name="unordered_multimap stringifications" status="run"/>
     <testcase classname="check11.cpp" name="tuple stringifications" status="run"/>
     <testcase classname="check11.cpp" name="ratio stringifications" status="run"/>
+    <testcase classname="check11.cpp" name="chrono time_point stringification&lt;>" status="run"/>
+    <testcase classname="check11.cpp" name="chrono time_point stringification&lt;>" status="run"/>
+    <testcase classname="check11.cpp" name="chrono time_point stringification&lt;>" status="run"/>
   </testsuite>
 </testsuites>

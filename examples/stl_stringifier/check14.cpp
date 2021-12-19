@@ -10,9 +10,4 @@ TEST_CASE("integer sequence stringifications") {
     FAIL_CHECK(make_index_sequence<3>());
 }
 
-TEST_CASE("chrono time_point stringification") {
-    using namespace chrono;
-    CHECK(doctest::toString(time_point<system_clock>()) != "{?}");
-}
-
 }

@@ -46,9 +46,21 @@ TEST_CASE("pair stringifications") {
     FAIL_CHECK(pair<int, const char*>{ 1, "one" });
 }
 
+#if defined(__clang__)
+    #if __has_feature(cxx_rtti)
+        #define TEST_HAS_RTTI
+    #endif
+#elif defined(__GNUC__) && defined(__GXX_RTTI) \
+   || defined(_MSC_VER) && defined(_CPPRTTI)
+    #define TEST_HAS_RTTI
+#endif
 TEST_CASE("typeinfo stringifications") {
+#ifdef TEST_HAS_RTTI
     struct Test { };
     CHECK(doctest::toString(typeid(Test)) != "{?}");
+#else
+    CHECK(true);
+#endif
 }
 
 }
